@@ -132,7 +132,7 @@ export default function App() {
   const risk = getRiskLevel();
 
   return (
-    <div className="min-h-screen bg-secondary text-text-main font-sans selection:bg-secondary selection:text-primary">
+    <div className="min-h-screen bg-white text-text-main font-sans selection:bg-secondary selection:text-primary">
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white border-b border-border h-[70px] flex items-center">
         <div className="max-w-[1200px] w-full mx-auto px-10 flex items-center justify-between">
@@ -194,87 +194,80 @@ export default function App() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="grid md:grid-cols-2 gap-16 items-center"
+              className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center"
             >
-              <div className="space-y-8">
+              <div className="relative w-full aspect-square md:order-1 order-2">
+                <div className="absolute inset-0 rounded-full overflow-hidden bg-secondary shadow-2xl">
+                  <img 
+                    src="https://picsum.photos/seed/doctor-protect/800/800" 
+                    className="w-full h-full object-cover opacity-90"
+                    alt="Penjagaan Rahim"
+                    referrerPolicy="no-referrer"
+                  />
+                  <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 w-full h-full text-white pointer-events-none">
+                     <path fill="currentColor" fillRule="evenodd" clipRule="evenodd" 
+                           d="M0,0 L100,0 L100,100 L0,100 Z 
+                              M45,85 L44,90 Q50,95 56,90 L55,85 C65,80 72,60 70,40 C68,20 60,12 50,12 C40,12 32,20 30,40 C28,60 35,80 45,85 Z
+                              M32,28 Q15,18 10,35 A4.5,4.5 0 1,0 12,42 Q20,25 35,38 Z
+                              M68,28 Q85,18 90,35 A4.5,4.5 0 1,1 88,42 Q80,25 65,38 Z" />
+                  </svg>
+                </div>
+                <div className="absolute -top-4 -left-4 w-32 h-32 bg-primary/10 rounded-full blur-2xl -z-10"></div>
+                <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-accent/10 rounded-full blur-3xl -z-10"></div>
+                
+                <div className="absolute bottom-4 left-4 md:bottom-8 md:-right-8 bg-white/95 backdrop-blur px-6 py-4 rounded-xl shadow-2xl border border-border flex items-center gap-4">
+                  <div className="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center shrink-0">
+                    <ShieldCheck className="text-primary w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-[#1A1A24] text-sm md:text-base">Penjagaan Rahim</h3>
+                    <p className="text-xs md:text-sm text-text-light">Aman & Terpercaya</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-6 md:order-2 order-1 px-4 md:px-0">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-secondary text-primary text-xs font-bold uppercase tracking-wider border border-primary/10">
-                  <ShieldCheck className="w-4 h-4" />
+                  <Activity className="w-4 h-4" />
                   Deteksi Dini Menyelamatkan Nyawa
                 </div>
-                <h1 className="text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight text-primary">
-                  Lindungi Diri dari <span className="text-accent italic">Kanker Serviks</span>
+                <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-black leading-[1.05] tracking-tighter text-[#1A1A24] uppercase">
+                  Lindungi Diri Karena Anda Berarti
                 </h1>
-                <p className="text-lg text-text-light leading-relaxed max-w-md">
-                  Lakukan skrining mandiri untuk mengetahui risiko Anda dan dapatkan rekomendasi pemeriksaan IVA (Inspeksi Visual Asam Asetat) secara dini.
+                <p className="text-lg md:text-xl text-text-light leading-relaxed max-w-lg font-medium">
+                  Lakukan skrining mandiri secara dini untuk mengetahui risiko Anda dan dapatkan rekomendasi pemeriksaan IVA yang tepat.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <button
+                <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                  <button 
                     onClick={startScreening}
-                    className="group bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:opacity-90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/10"
+                    className="group bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:opacity-90 transition-all flex items-center justify-center gap-2 shadow-xl shadow-primary/20"
                   >
-                    Mulai Skrining Sekarang
+                    Mulai Skrining
                     <ArrowRight className="group-hover:translate-x-1 transition-transform" />
                   </button>
-                  <button
+                  <button 
                     onClick={() => setStep('education')}
-                    className="px-8 py-4 rounded-xl font-bold text-lg border border-border bg-white hover:bg-secondary transition-all flex items-center justify-center gap-2 text-text-main"
+                    className="px-8 py-4 rounded-xl font-bold text-lg border-2 border-border bg-white hover:border-primary hover:text-primary transition-all flex items-center justify-center gap-2 text-text-main"
                   >
-                    Pelajari Tentang IVA
+                    Info IVA
                   </button>
                 </div>
-
-                <div className="flex flex-wrap items-center gap-4 pt-6 border-t border-border">
+                
+                <div className="flex flex-wrap items-center gap-4 pt-8 border-t border-border/50">
                   <div className="flex -space-x-2 shrink-0">
-                    {[1, 2, 3].map(i => (
-                      <img
+                    {[1,2,3].map(i => (
+                      <img 
                         key={i}
-                        src={`https://picsum.photos/seed/user${i}/100/100`}
-                        className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-md"
+                        src={`https://picsum.photos/seed/user${i}/100/100`} 
+                        className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm"
                         alt="User"
                         referrerPolicy="no-referrer"
                       />
                     ))}
                   </div>
                   <p className="text-sm text-text-light flex-1 min-w-[200px]">
-                    <span className="font-bold text-text-main">10,000+</span> wanita telah melakukan skrining mandiri
+                    <span className="font-bold text-[#1A1A24]">10,000+</span> wanita telah melakukan skrining mandiri
                   </p>
-                </div>
-              </div>
-
-              <div className="relative">
-                <div className="absolute -inset-4 bg-secondary rounded-2xl rotate-2 -z-10 opacity-50"></div>
-                <div className="rounded-2xl shadow-xl w-full aspect-[4/5] border border-border bg-gradient-to-br from-secondary to-white flex items-center justify-center p-8 relative overflow-hidden">
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-                    transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                    className="absolute w-64 h-64 bg-primary/20 rounded-full blur-3xl"
-                  />
-                  <motion.div
-                    animate={{ scale: [1, 1.05, 1] }}
-                    transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                    className="relative z-10 w-[65%] max-w-[260px] pb-20 md:pb-16"
-                  >
-                    <svg viewBox="0 0 100 100" className="w-full h-full text-primary drop-shadow-2xl" fill="currentColor">
-                      <path d="M50 75 C35 75 30 55 30 40 C30 20 40 15 50 15 C60 15 70 20 70 40 C70 55 65 75 50 75 Z" opacity="0.9" />
-                      <path d="M43 73 L40 85 Q50 90 60 85 L57 73 Z" opacity="0.7" />
-                      <path d="M32 25 Q15 20 15 35" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.8" />
-                      <path d="M68 25 Q85 20 85 35" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.8" />
-                      <circle cx="12" cy="38" r="4.5" fill="var(--color-accent)" />
-                      <circle cx="88" cy="38" r="4.5" fill="var(--color-accent)" />
-                      <path d="M50 22 C45 22 42 28 42 35 C42 45 48 55 50 55 C52 55 58 45 58 35 C58 28 55 22 50 22 Z" fill="#ffffff" opacity="0.2" />
-                    </svg>
-                  </motion.div>
-                </div>
-                <div className="absolute bottom-4 left-4 right-4 md:bottom-8 md:left-8 md:right-8 bg-white/95 backdrop-blur p-4 md:p-6 rounded-2xl shadow-2xl border border-border">
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-secondary rounded-xl flex items-center justify-center shrink-0">
-                      <Activity className="text-primary w-5 h-5 md:w-6 md:h-6" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-primary text-sm md:text-base">Tes IVA</h3>
-                      <p className="text-xs md:text-sm text-text-light leading-snug">Metode deteksi dini yang mudah, murah, dan efektif.</p>
-                    </div>
-                  </div>
                 </div>
               </div>
             </motion.div>
