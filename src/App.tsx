@@ -199,17 +199,26 @@ export default function App() {
               <div className="relative w-full aspect-square md:order-1 order-2">
                 <div className="absolute inset-0 rounded-full overflow-hidden bg-secondary shadow-2xl">
                   <img 
-                    src="https://picsum.photos/seed/doctor-protect/800/800" 
-                    className="w-full h-full object-cover opacity-90"
-                    alt="Penjagaan Rahim"
-                    referrerPolicy="no-referrer"
+                    src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=800" 
+                    className="w-full h-full object-cover opacity-95 hover:scale-105 transition-transform duration-1000"
+                    alt="Dokter menangani pasien serviks"
                   />
                   <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 w-full h-full text-white pointer-events-none">
                      <path fill="currentColor" fillRule="evenodd" clipRule="evenodd" 
-                           d="M0,0 L100,0 L100,100 L0,100 Z 
-                              M45,85 L44,90 Q50,95 56,90 L55,85 C65,80 72,60 70,40 C68,20 60,12 50,12 C40,12 32,20 30,40 C28,60 35,80 45,85 Z
-                              M32,28 Q15,18 10,35 A4.5,4.5 0 1,0 12,42 Q20,25 35,38 Z
-                              M68,28 Q85,18 90,35 A4.5,4.5 0 1,1 88,42 Q80,25 65,38 Z" />
+                           d="M0,0 H100 V100 H0 Z 
+                              M 46 90 
+                              Q 50 93 54 90 
+                              L 54 83 
+                              C 62 78 66 65 66 52 
+                              C 66 48 75 42 82 45 
+                              C 88 48 92 40 85 36 
+                              C 78 32 70 35 62 26 
+                              C 58 15 42 15 38 26 
+                              C 30 35 22 32 15 36 
+                              C 8 40 12 48 18 45 
+                              C 25 42 34 48 34 52 
+                              C 34 65 38 78 46 83 
+                              L 46 90 Z" />
                   </svg>
                 </div>
                 <div className="absolute -top-4 -left-4 w-32 h-32 bg-primary/10 rounded-full blur-2xl -z-10"></div>
