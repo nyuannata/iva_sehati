@@ -21,6 +21,16 @@ import {
   Activity
 } from 'lucide-react';
 
+const PuskesmasLogo = ({ className = "w-6 h-6", fillColor = "currentColor" }) => (
+  <svg viewBox="0 0 120 120" className={className} xmlns="http://www.w3.org/2000/svg" fill="none">
+    <polygon points="60,8 112,38 112,98 60,128 8,98 8,38" fill="none" stroke={fillColor} strokeWidth="12" strokeLinejoin="round"/>
+    <path d="M42,28 V46 H20 V74 H42 V92 H68 V74 H90 V46 H68 V28 Z" fill={fillColor} />
+    <path d="M42,70 L72,46 L108,70 L108,82 L72,56 L42,80 Z" fill="#fff" />
+    <circle cx="67" cy="74" r="6" fill="none" stroke="#fff" strokeWidth="3" />
+    <circle cx="77" cy="74" r="6" fill="none" stroke="#fff" strokeWidth="3" />
+  </svg>
+);
+
 // Types
 type Step = 'landing' | 'screening' | 'result' | 'education';
 
@@ -111,22 +121,14 @@ export default function App() {
 
   const getRiskLevel = () => {
     const hasSymptoms = data.symptoms.length > 0 && !data.symptoms.includes('none');
-    const ageNum = parseInt(data.age);
-    const neverTested = data.lastTest === 'never' || data.lastTest === 'more_than_5';
 
-    // Additional risk factors
-    const hasRiskFactors =
-      data.multipara ||
-      data.hormonalContraception ||
-      data.smokingExposure ||
-      data.hivStatus ||
-      data.earlySexualActivity ||
-      data.multiplePartners ||
-      data.earlyFirstBirth;
-
-    if (hasSymptoms) return 'high';
-    if ((ageNum >= 30 && ageNum <= 50 && neverTested) || hasRiskFactors) return 'medium';
-    return 'low';
+    if (hasSymptoms) return 'symptoms';
+    
+    if (data.maritalStatus === 'married' || data.maritalStatus === 'divorced' || data.sexuallyActive) {
+      return 'active';
+    }
+    
+    return 'inactive';
   };
 
   const risk = getRiskLevel();
@@ -140,10 +142,11 @@ export default function App() {
             className="flex items-center gap-2 cursor-pointer"
             onClick={() => setStep('landing')}
           >
-            <div className="w-8 h-8 bg-primary rounded-xl flex items-center justify-center">
-              <Heart className="text-white w-5 h-5" />
+            <PuskesmasLogo className="w-8 h-8 text-primary" />
+            <div className="flex flex-col">
+              <span className="font-extrabold text-xl tracking-tight text-primary leading-none">SIPAKAR</span>
+              <span className="text-[10px] sm:text-xs font-bold text-text-light leading-none mt-1">Skrining IVA Perempuan Pakuan Baru</span>
             </div>
-            <span className="font-extrabold text-2xl tracking-tight text-primary">IVA SEHATI</span>
           </div>
 
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-text-main">
@@ -630,29 +633,29 @@ export default function App() {
               className="grid md:grid-cols-[1fr_320px] gap-8 items-start"
             >
               <div className="bg-white rounded-2xl border border-border shadow-md overflow-hidden">
-                <div className={`p-10 text-center space-y-6 ${risk === 'high' ? 'bg-rose-50' :
-                  risk === 'medium' ? 'bg-amber-50' :
+                <div className={`p-10 text-center space-y-6 ${risk === 'symptoms' ? 'bg-rose-50' :
+                  risk === 'active' ? 'bg-amber-50' :
                     'bg-emerald-50'
                   }`}>
-                  <div className={`w-20 h-20 rounded-full mx-auto flex items-center justify-center shadow-lg ${risk === 'high' ? 'bg-accent' :
-                    risk === 'medium' ? 'bg-amber-500' :
+                  <div className={`w-20 h-20 rounded-full mx-auto flex items-center justify-center shadow-lg ${risk === 'symptoms' ? 'bg-accent' :
+                    risk === 'active' ? 'bg-amber-500' :
                       'bg-success'
                     }`}>
-                    {risk === 'high' ? <AlertCircle className="text-white w-10 h-10" /> :
-                      risk === 'medium' ? <Info className="text-white w-10 h-10" /> :
+                    {risk === 'symptoms' ? <AlertCircle className="text-white w-10 h-10" /> :
+                      risk === 'active' ? <Info className="text-white w-10 h-10" /> :
                         <CheckCircle2 className="text-white w-10 h-10" />}
                   </div>
 
                   <div className="space-y-2">
-                    <h2 className="text-3xl font-bold text-primary">
-                      {risk === 'high' ? 'Perhatian Khusus Diperlukan' :
-                        risk === 'medium' ? 'Waktunya Pemeriksaan Rutin' :
-                          'Risiko Anda Tergolong Rendah'}
+                    <h2 className="text-3xl font-bold text-primary max-w-3xl mx-auto leading-tight">
+                      {risk === 'symptoms' ? 'PERIKSA IVA SEGERA - Perhatian Khusus Diperlukan' :
+                        risk === 'active' ? 'Waktunya Pemeriksaan IVA' :
+                          'Status Kesehatan Organ Reproduksi Anda Tergolong Sehat'}
                     </h2>
-                    <p className="text-text-light max-w-lg mx-auto">
-                      {risk === 'high' ? 'Berdasarkan gejala yang Anda alami, kami sangat menyarankan Anda untuk segera berkonsultasi dengan tenaga medis.' :
-                        risk === 'medium' ? 'Anda berada dalam rentang usia produktif dan sudah waktunya untuk melakukan pemeriksaan IVA rutin.' :
-                          'Tetap jaga kesehatan reproduksi Anda dan lakukan pemeriksaan rutin sesuai anjuran.'}
+                    <p className="text-text-main max-w-2xl mx-auto font-medium text-lg leading-relaxed">
+                      {risk === 'symptoms' ? 'Berdasarkan gejala yang Anda alami, kami sangat menyarankan untuk segera melakukan pemeriksaan IVA dan berkonsultasi dengan tenaga medis.' :
+                        risk === 'active' ? 'Tetap jaga kesehatan Reproduksi Anda dan lakukan Pemeriksaan Rutin IVA 3 tahun sekali.' :
+                          'Tetap jaga kesehatan reproduksi Anda dan Lakukan pemeriksaan rutin sesuai anjuran.'}
                     </p>
                   </div>
                 </div>
@@ -665,23 +668,23 @@ export default function App() {
                         Rekomendasi Tindakan
                       </h4>
                       <ul className="space-y-3 text-text-main text-sm">
-                        {risk === 'high' ? (
+                        {risk === 'symptoms' ? (
                           <>
-                            <li className="flex gap-2">• Segera kunjungi Puskesmas atau dokter kandungan.</li>
-                            <li className="flex gap-2">• Minta pemeriksaan IVA atau Pap Smear.</li>
-                            <li className="flex gap-2">• Jangan menunda pemeriksaan meskipun perdarahan berhenti.</li>
+                            <li className="flex gap-2">• Segera kunjungi Puskesmas Pakuan Baru atau dokter terdekat.</li>
+                            <li className="flex gap-2">• Sampaikan keluhan Anda kepada tenaga medis.</li>
+                            <li className="flex gap-2">• Jangan menunda pemeriksaan untuk deteksi dini.</li>
                           </>
-                        ) : risk === 'medium' ? (
+                        ) : risk === 'active' ? (
                           <>
-                            <li className="flex gap-2">• Jadwalkan tes IVA di Puskesmas terdekat.</li>
+                            <li className="flex gap-2">• Jadwalkan tes IVA di Puskesmas Pakuan Baru.</li>
                             <li className="flex gap-2">• Tes IVA hanya memakan waktu 5-10 menit.</li>
-                            <li className="flex gap-2">• Lakukan tes ini minimal 3 tahun sekali.</li>
+                            <li className="flex gap-2">• Lakukan tes ini 3 tahun sekali.</li>
                           </>
                         ) : (
                           <>
-                            <li className="flex gap-2">• Lakukan pemeriksaan rutin jika sudah berusia 30+.</li>
-                            <li className="flex gap-2">• Jaga pola hidup sehat dan hindari rokok.</li>
-                            <li className="flex gap-2">• Vaksinasi HPV jika memungkinkan.</li>
+                            <li className="flex gap-2">• Lakukan pemeriksaan rutin pada fasilitas kesehatan seperti Puskesmas Pakuan Baru jika dianjurkan.</li>
+                            <li className="flex gap-2">• Jaga pola hidup sehat.</li>
+                            <li className="flex gap-2">• Dapatkan vaksinasi HPV bila memungkinkan.</li>
                           </>
                         )}
                       </ul>
@@ -696,8 +699,8 @@ export default function App() {
                         Pemeriksaan IVA dapat dilakukan di fasilitas kesehatan tingkat pertama:
                       </p>
                       <div className="space-y-2">
-                        <div className="p-3 bg-secondary rounded-xl text-xs font-bold text-primary">Puskesmas Terdekat</div>
-                        <div className="p-3 bg-secondary rounded-xl text-xs font-bold text-primary">Klinik Pratama</div>
+                        <div className="p-3 bg-secondary rounded-xl text-xs font-bold text-primary">Puskesmas Pakuan Baru</div>
+                        <div className="p-3 bg-secondary rounded-xl text-xs font-bold text-primary">Klinik Pratama Terdekat</div>
                         <div className="p-3 bg-secondary rounded-xl text-xs font-bold text-primary">Bidan Praktik Mandiri</div>
                       </div>
                     </div>
@@ -824,17 +827,15 @@ export default function App() {
       <footer className="bg-white border-t border-border py-12 mt-20">
         <div className="max-w-[1200px] mx-auto px-10 text-center space-y-6">
           <div className="flex items-center justify-center gap-2">
-            <div className="w-6 h-6 bg-primary rounded flex items-center justify-center">
-              <Heart className="text-white w-4 h-4" />
-            </div>
-            <span className="font-bold text-lg tracking-tight text-primary">IVA SEHATI</span>
+            <PuskesmasLogo className="w-8 h-8 text-primary" />
+            <span className="font-bold text-xl tracking-tight text-primary">SIPAKAR</span>
           </div>
           <p className="text-text-light text-sm max-w-md mx-auto">
             Aplikasi ini hanya bersifat skrining awal dan edukasi. Hasil skrining bukan merupakan diagnosis medis final.
           </p>
           <div className="text-text-light text-xs">
             © 2026 - Skrining IVA Mandiri. Dibuat untuk kesehatan wanita Indonesia.<br />
-            <span className="mt-2 block font-medium">Developed by yuan nata nugraha</span>
+            <span className="mt-2 block font-medium">Developed by dr. Zafira Nadwa</span>
           </div>
         </div>
       </footer>
