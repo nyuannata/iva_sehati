@@ -5,14 +5,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Heart, 
-  Info, 
-  ChevronRight, 
-  ChevronLeft, 
-  AlertCircle, 
-  CheckCircle2, 
-  Stethoscope, 
+import {
+  Heart,
+  Info,
+  ChevronRight,
+  ChevronLeft,
+  AlertCircle,
+  CheckCircle2,
+  Stethoscope,
   MapPin,
   ArrowRight,
   Menu,
@@ -100,7 +100,7 @@ export default function App() {
       setData(prev => ({ ...prev, symptoms: ['none'] }));
       return;
     }
-    
+
     setData(prev => {
       const newSymptoms = prev.symptoms.includes(id)
         ? prev.symptoms.filter(s => s !== id)
@@ -113,17 +113,17 @@ export default function App() {
     const hasSymptoms = data.symptoms.length > 0 && !data.symptoms.includes('none');
     const ageNum = parseInt(data.age);
     const neverTested = data.lastTest === 'never' || data.lastTest === 'more_than_5';
-    
+
     // Additional risk factors
-    const hasRiskFactors = 
-      data.multipara || 
-      data.hormonalContraception || 
-      data.smokingExposure || 
-      data.hivStatus || 
-      data.earlySexualActivity || 
-      data.multiplePartners || 
+    const hasRiskFactors =
+      data.multipara ||
+      data.hormonalContraception ||
+      data.smokingExposure ||
+      data.hivStatus ||
+      data.earlySexualActivity ||
+      data.multiplePartners ||
       data.earlyFirstBirth;
-    
+
     if (hasSymptoms) return 'high';
     if ((ageNum >= 30 && ageNum <= 50 && neverTested) || hasRiskFactors) return 'medium';
     return 'low';
@@ -136,8 +136,8 @@ export default function App() {
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white border-b border-border h-[70px] flex items-center">
         <div className="max-w-[1200px] w-full mx-auto px-10 flex items-center justify-between">
-          <div 
-            className="flex items-center gap-2 cursor-pointer" 
+          <div
+            className="flex items-center gap-2 cursor-pointer"
             onClick={() => setStep('landing')}
           >
             <div className="w-8 h-8 bg-primary rounded-xl flex items-center justify-center">
@@ -145,11 +145,11 @@ export default function App() {
             </div>
             <span className="font-extrabold text-2xl tracking-tight text-primary">IVA SEHATI</span>
           </div>
-          
+
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-text-main">
             <button onClick={() => setStep('landing')} className="hover:text-primary transition-colors">Beranda</button>
             <button onClick={() => setStep('education')} className="hover:text-primary transition-colors">Informasi IVA</button>
-            <button 
+            <button
               onClick={startScreening}
               className="bg-primary text-white px-6 py-2.5 rounded-xl hover:opacity-90 transition-all font-semibold"
             >
@@ -166,7 +166,7 @@ export default function App() {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -175,7 +175,7 @@ export default function App() {
             <div className="flex flex-col gap-6 text-lg font-medium">
               <button onClick={() => { setStep('landing'); setIsMenuOpen(false); }}>Beranda</button>
               <button onClick={() => { setStep('education'); setIsMenuOpen(false); }}>Informasi IVA</button>
-              <button 
+              <button
                 onClick={() => { startScreening(); setIsMenuOpen(false); }}
                 className="bg-primary text-white p-4 rounded-2xl text-center font-bold"
               >
@@ -189,7 +189,7 @@ export default function App() {
       <main className="max-w-[1200px] mx-auto px-10 py-10">
         <AnimatePresence mode="wait">
           {step === 'landing' && (
-            <motion.div 
+            <motion.div
               key="landing"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -208,34 +208,34 @@ export default function App() {
                   Lakukan skrining mandiri untuk mengetahui risiko Anda dan dapatkan rekomendasi pemeriksaan IVA (Inspeksi Visual Asam Asetat) secara dini.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button 
+                  <button
                     onClick={startScreening}
                     className="group bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:opacity-90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/10"
                   >
                     Mulai Skrining Sekarang
                     <ArrowRight className="group-hover:translate-x-1 transition-transform" />
                   </button>
-                  <button 
+                  <button
                     onClick={() => setStep('education')}
                     className="px-8 py-4 rounded-xl font-bold text-lg border border-border bg-white hover:bg-secondary transition-all flex items-center justify-center gap-2 text-text-main"
                   >
                     Pelajari Tentang IVA
                   </button>
                 </div>
-                
-                <div className="flex items-center gap-6 pt-6 border-t border-border">
-                  <div className="flex -space-x-2">
-                    {[1,2,3].map(i => (
-                      <img 
+
+                <div className="flex flex-wrap items-center gap-4 pt-6 border-t border-border">
+                  <div className="flex -space-x-2 shrink-0">
+                    {[1, 2, 3].map(i => (
+                      <img
                         key={i}
-                        src={`https://picsum.photos/seed/user${i}/100/100`} 
+                        src={`https://picsum.photos/seed/user${i}/100/100`}
                         className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-md"
                         alt="User"
                         referrerPolicy="no-referrer"
                       />
                     ))}
                   </div>
-                  <p className="text-sm text-text-light">
+                  <p className="text-sm text-text-light flex-1 min-w-[200px]">
                     <span className="font-bold text-text-main">10,000+</span> wanita telah melakukan skrining mandiri
                   </p>
                 </div>
@@ -243,16 +243,16 @@ export default function App() {
 
               <div className="relative">
                 <div className="absolute -inset-4 bg-secondary rounded-2xl rotate-2 -z-10 opacity-50"></div>
-                <div className="rounded-2xl shadow-xl w-full aspect-[4/5] border border-border bg-gradient-to-br from-secondary to-white flex items-center justify-center p-12 relative overflow-hidden">
-                  <motion.div 
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }} 
+                <div className="rounded-2xl shadow-xl w-full aspect-[4/5] border border-border bg-gradient-to-br from-secondary to-white flex items-center justify-center p-8 relative overflow-hidden">
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
                     transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
                     className="absolute w-64 h-64 bg-primary/20 rounded-full blur-3xl"
                   />
-                  <motion.div 
+                  <motion.div
                     animate={{ scale: [1, 1.05, 1] }}
                     transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                    className="relative z-10 w-full h-full"
+                    className="relative z-10 w-[65%] max-w-[260px] pb-20 md:pb-16"
                   >
                     <svg viewBox="0 0 100 100" className="w-full h-full text-primary drop-shadow-2xl" fill="currentColor">
                       <path d="M50 75 C35 75 30 55 30 40 C30 20 40 15 50 15 C60 15 70 20 70 40 C70 55 65 75 50 75 Z" opacity="0.9" />
@@ -265,14 +265,14 @@ export default function App() {
                     </svg>
                   </motion.div>
                 </div>
-                <div className="absolute bottom-8 left-8 right-8 bg-white/95 backdrop-blur p-6 rounded-2xl shadow-2xl border border-border">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center shrink-0">
-                      <Activity className="text-primary" />
+                <div className="absolute bottom-4 left-4 right-4 md:bottom-8 md:left-8 md:right-8 bg-white/95 backdrop-blur p-4 md:p-6 rounded-2xl shadow-2xl border border-border">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-secondary rounded-xl flex items-center justify-center shrink-0">
+                      <Activity className="text-primary w-5 h-5 md:w-6 md:h-6" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-primary">Tes IVA</h3>
-                      <p className="text-sm text-text-light">Metode deteksi dini yang mudah, murah, dan efektif.</p>
+                      <h3 className="font-bold text-primary text-sm md:text-base">Tes IVA</h3>
+                      <p className="text-xs md:text-sm text-text-light leading-snug">Metode deteksi dini yang mudah, murah, dan efektif.</p>
                     </div>
                   </div>
                 </div>
@@ -281,7 +281,7 @@ export default function App() {
           )}
 
           {step === 'screening' && (
-            <motion.div 
+            <motion.div
               key="screening"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -292,22 +292,21 @@ export default function App() {
                 <div className="p-8 md:p-10 border-b border-border">
                   <div className="flex gap-3 mb-6">
                     {[0, 1, 2, 3, 4, 5].map((s) => (
-                      <div 
+                      <div
                         key={s}
-                        className={`flex-1 h-1.5 rounded-full transition-colors ${
-                          s < screeningStep ? 'bg-success' : 
-                          s === screeningStep ? 'bg-primary' : 'bg-secondary'
-                        }`}
+                        className={`flex-1 h-1.5 rounded-full transition-colors ${s < screeningStep ? 'bg-success' :
+                            s === screeningStep ? 'bg-primary' : 'bg-secondary'
+                          }`}
                       />
                     ))}
                   </div>
                   <p className="text-text-light text-xs uppercase font-bold tracking-wider">
                     Langkah {screeningStep + 1} dari 6: {
                       screeningStep === 0 ? 'Data Diri' :
-                      screeningStep === 1 ? 'Riwayat Hubungan' :
-                      screeningStep === 2 ? 'Riwayat Kesehatan' : 
-                      screeningStep === 3 ? 'Keluhan Saat Ini' : 
-                      screeningStep === 4 ? 'Riwayat Pemeriksaan' : 'Rencana Pemeriksaan'
+                        screeningStep === 1 ? 'Riwayat Hubungan' :
+                          screeningStep === 2 ? 'Riwayat Kesehatan' :
+                            screeningStep === 3 ? 'Keluhan Saat Ini' :
+                              screeningStep === 4 ? 'Riwayat Pemeriksaan' : 'Rencana Pemeriksaan'
                     }
                   </p>
                 </div>
@@ -319,8 +318,8 @@ export default function App() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                           <label className="text-sm font-bold text-text-main">Nama Lengkap</label>
-                          <input 
-                            type="text" 
+                          <input
+                            type="text"
                             value={data.name}
                             onChange={(e) => setData({ ...data, name: e.target.value })}
                             className="w-full p-4 rounded-2xl border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
@@ -329,8 +328,8 @@ export default function App() {
                         </div>
                         <div className="space-y-2">
                           <label className="text-sm font-bold text-text-main">Usia (Tahun)</label>
-                          <input 
-                            type="number" 
+                          <input
+                            type="number"
                             value={data.age}
                             onChange={(e) => setData({ ...data, age: e.target.value })}
                             className="w-full p-4 rounded-2xl border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
@@ -339,7 +338,7 @@ export default function App() {
                         </div>
                         <div className="space-y-2">
                           <label className="text-sm font-bold text-text-main">Status Pernikahan</label>
-                          <select 
+                          <select
                             value={data.maritalStatus}
                             onChange={(e) => setData({ ...data, maritalStatus: e.target.value })}
                             className="w-full p-4 rounded-2xl border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all bg-white"
@@ -352,8 +351,8 @@ export default function App() {
                         </div>
                         <div className="space-y-2">
                           <label className="text-sm font-bold text-text-main">Nomor HP</label>
-                          <input 
-                            type="tel" 
+                          <input
+                            type="tel"
                             value={data.phone}
                             onChange={(e) => setData({ ...data, phone: e.target.value })}
                             className="w-full p-4 rounded-2xl border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
@@ -362,7 +361,7 @@ export default function App() {
                         </div>
                         <div className="space-y-2 md:col-span-2">
                           <label className="text-sm font-bold text-text-main">Alamat Lengkap</label>
-                          <textarea 
+                          <textarea
                             value={data.address}
                             onChange={(e) => setData({ ...data, address: e.target.value })}
                             className="w-full p-4 rounded-2xl border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all min-h-[100px]"
@@ -382,9 +381,8 @@ export default function App() {
                             <button
                               key={String(val)}
                               onClick={() => setData({ ...data, sexuallyActive: val })}
-                              className={`flex-1 p-4 rounded-2xl font-bold border-2 transition-all ${
-                                data.sexuallyActive === val ? 'border-primary bg-secondary text-primary' : 'border-border text-text-light'
-                              }`}
+                              className={`flex-1 p-4 rounded-2xl font-bold border-2 transition-all ${data.sexuallyActive === val ? 'border-primary bg-secondary text-primary' : 'border-border text-text-light'
+                                }`}
                             >
                               {val ? 'Ya, Sudah Pernah' : 'Belum Pernah'}
                             </button>
@@ -393,7 +391,7 @@ export default function App() {
                       </div>
 
                       {data.sexuallyActive && (
-                        <motion.div 
+                        <motion.div
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: 'auto' }}
                           className="space-y-8"
@@ -405,9 +403,8 @@ export default function App() {
                                 <button
                                   key={String(val)}
                                   onClick={() => setData({ ...data, earlySexualActivity: val })}
-                                  className={`flex-1 p-4 rounded-2xl font-bold border-2 transition-all ${
-                                    data.earlySexualActivity === val ? 'border-primary bg-secondary text-primary' : 'border-border text-text-light'
-                                  }`}
+                                  className={`flex-1 p-4 rounded-2xl font-bold border-2 transition-all ${data.earlySexualActivity === val ? 'border-primary bg-secondary text-primary' : 'border-border text-text-light'
+                                    }`}
                                 >
                                   {val ? 'Ya' : 'Tidak'}
                                 </button>
@@ -422,9 +419,8 @@ export default function App() {
                                 <button
                                   key={String(val)}
                                   onClick={() => setData({ ...data, multiplePartners: val })}
-                                  className={`flex-1 p-4 rounded-2xl font-bold border-2 transition-all ${
-                                    data.multiplePartners === val ? 'border-primary bg-secondary text-primary' : 'border-border text-text-light'
-                                  }`}
+                                  className={`flex-1 p-4 rounded-2xl font-bold border-2 transition-all ${data.multiplePartners === val ? 'border-primary bg-secondary text-primary' : 'border-border text-text-light'
+                                    }`}
                                 >
                                   {val ? 'Ya' : 'Tidak'}
                                 </button>
@@ -451,9 +447,8 @@ export default function App() {
                               <button
                                 key={String(val)}
                                 onClick={() => setData({ ...data, multipara: val })}
-                                className={`flex-1 p-4 rounded-2xl font-bold border-2 transition-all ${
-                                  data.multipara === val ? 'border-primary bg-secondary text-primary' : 'border-border text-text-light'
-                                }`}
+                                className={`flex-1 p-4 rounded-2xl font-bold border-2 transition-all ${data.multipara === val ? 'border-primary bg-secondary text-primary' : 'border-border text-text-light'
+                                  }`}
                               >
                                 {val ? 'Ya' : 'Tidak'}
                               </button>
@@ -468,9 +463,8 @@ export default function App() {
                               <button
                                 key={String(val)}
                                 onClick={() => setData({ ...data, earlyFirstBirth: val })}
-                                className={`flex-1 p-4 rounded-2xl font-bold border-2 transition-all ${
-                                  data.earlyFirstBirth === val ? 'border-primary bg-secondary text-primary' : 'border-border text-text-light'
-                                }`}
+                                className={`flex-1 p-4 rounded-2xl font-bold border-2 transition-all ${data.earlyFirstBirth === val ? 'border-primary bg-secondary text-primary' : 'border-border text-text-light'
+                                  }`}
                               >
                                 {val ? 'Ya' : 'Tidak'}
                               </button>
@@ -485,9 +479,8 @@ export default function App() {
                               <button
                                 key={String(val)}
                                 onClick={() => setData({ ...data, hormonalContraception: val })}
-                                className={`flex-1 p-4 rounded-2xl font-bold border-2 transition-all ${
-                                  data.hormonalContraception === val ? 'border-primary bg-secondary text-primary' : 'border-border text-text-light'
-                                }`}
+                                className={`flex-1 p-4 rounded-2xl font-bold border-2 transition-all ${data.hormonalContraception === val ? 'border-primary bg-secondary text-primary' : 'border-border text-text-light'
+                                  }`}
                               >
                                 {val ? 'Ya' : 'Tidak'}
                               </button>
@@ -502,9 +495,8 @@ export default function App() {
                               <button
                                 key={String(val)}
                                 onClick={() => setData({ ...data, smokingExposure: val })}
-                                className={`flex-1 p-4 rounded-2xl font-bold border-2 transition-all ${
-                                  data.smokingExposure === val ? 'border-primary bg-secondary text-primary' : 'border-border text-text-light'
-                                }`}
+                                className={`flex-1 p-4 rounded-2xl font-bold border-2 transition-all ${data.smokingExposure === val ? 'border-primary bg-secondary text-primary' : 'border-border text-text-light'
+                                  }`}
                               >
                                 {val ? 'Ya' : 'Tidak'}
                               </button>
@@ -519,9 +511,8 @@ export default function App() {
                               <button
                                 key={String(val)}
                                 onClick={() => setData({ ...data, hivStatus: val })}
-                                className={`flex-1 p-4 rounded-2xl font-bold border-2 transition-all ${
-                                  data.hivStatus === val ? 'border-primary bg-secondary text-primary' : 'border-border text-text-light'
-                                }`}
+                                className={`flex-1 p-4 rounded-2xl font-bold border-2 transition-all ${data.hivStatus === val ? 'border-primary bg-secondary text-primary' : 'border-border text-text-light'
+                                  }`}
                               >
                                 {val ? 'Ya' : 'Tidak'}
                               </button>
@@ -540,16 +531,14 @@ export default function App() {
                           <button
                             key={symptom.id}
                             onClick={() => toggleSymptom(symptom.id)}
-                            className={`w-full p-5 rounded-2xl text-left text-lg font-semibold border-2 transition-all flex items-center justify-between ${
-                              data.symptoms.includes(symptom.id)
-                                ? 'border-primary bg-secondary text-primary' 
+                            className={`w-full p-5 rounded-2xl text-left text-lg font-semibold border-2 transition-all flex items-center justify-between ${data.symptoms.includes(symptom.id)
+                                ? 'border-primary bg-secondary text-primary'
                                 : 'border-border hover:border-primary/30 text-text-main'
-                            }`}
+                              }`}
                           >
                             {symptom.label}
-                            <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                              data.symptoms.includes(symptom.id) ? 'bg-primary border-primary' : 'border-border'
-                            }`}>
+                            <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${data.symptoms.includes(symptom.id) ? 'bg-primary border-primary' : 'border-border'
+                              }`}>
                               {data.symptoms.includes(symptom.id) && <CheckCircle2 className="w-4 h-4 text-white" />}
                             </div>
                           </button>
@@ -571,11 +560,10 @@ export default function App() {
                           <button
                             key={opt.id}
                             onClick={() => setData({ ...data, lastTest: opt.id })}
-                            className={`w-full p-5 rounded-2xl text-left text-lg font-semibold border-2 transition-all flex items-center justify-between ${
-                              data.lastTest === opt.id
-                                ? 'border-primary bg-secondary text-primary' 
+                            className={`w-full p-5 rounded-2xl text-left text-lg font-semibold border-2 transition-all flex items-center justify-between ${data.lastTest === opt.id
+                                ? 'border-primary bg-secondary text-primary'
                                 : 'border-border hover:border-primary/30 text-text-main'
-                            }`}
+                              }`}
                           >
                             {opt.label}
                             {data.lastTest === opt.id && <CheckCircle2 className="w-6 h-6 text-primary" />}
@@ -597,9 +585,8 @@ export default function App() {
                             <button
                               key={opt.label}
                               onClick={() => setData({ ...data, willingToIva: opt.val })}
-                              className={`flex-1 p-6 rounded-2xl font-bold border-2 transition-all ${
-                                data.willingToIva === opt.val ? 'border-primary bg-secondary text-primary' : 'border-border text-text-light'
-                              }`}
+                              className={`flex-1 p-6 rounded-2xl font-bold border-2 transition-all ${data.willingToIva === opt.val ? 'border-primary bg-secondary text-primary' : 'border-border text-text-light'
+                                }`}
                             >
                               {opt.label}
                             </button>
@@ -616,13 +603,13 @@ export default function App() {
                 </div>
 
                 <div className="p-8 md:p-10 bg-secondary/30 border-t border-border flex justify-between">
-                  <button 
+                  <button
                     onClick={handleBack}
                     className="px-6 py-3 rounded-xl font-bold border border-border bg-white text-text-light hover:bg-secondary/30 transition-all flex items-center gap-2"
                   >
                     <ChevronLeft className="w-4 h-4" /> Kembali
                   </button>
-                  <button 
+                  <button
                     onClick={handleNext}
                     disabled={
                       (screeningStep === 0 && (!data.name || !data.age || !data.maritalStatus || !data.phone || !data.address)) ||
@@ -659,38 +646,36 @@ export default function App() {
           )}
 
           {step === 'result' && (
-            <motion.div 
+            <motion.div
               key="result"
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               className="grid md:grid-cols-[1fr_320px] gap-8 items-start"
             >
               <div className="bg-white rounded-2xl border border-border shadow-md overflow-hidden">
-                <div className={`p-10 text-center space-y-6 ${
-                  risk === 'high' ? 'bg-rose-50' : 
-                  risk === 'medium' ? 'bg-amber-50' : 
-                  'bg-emerald-50'
-                }`}>
-                  <div className={`w-20 h-20 rounded-full mx-auto flex items-center justify-center shadow-lg ${
-                    risk === 'high' ? 'bg-accent' : 
-                    risk === 'medium' ? 'bg-amber-500' : 
-                    'bg-success'
+                <div className={`p-10 text-center space-y-6 ${risk === 'high' ? 'bg-rose-50' :
+                    risk === 'medium' ? 'bg-amber-50' :
+                      'bg-emerald-50'
                   }`}>
-                    {risk === 'high' ? <AlertCircle className="text-white w-10 h-10" /> : 
-                     risk === 'medium' ? <Info className="text-white w-10 h-10" /> : 
-                     <CheckCircle2 className="text-white w-10 h-10" />}
+                  <div className={`w-20 h-20 rounded-full mx-auto flex items-center justify-center shadow-lg ${risk === 'high' ? 'bg-accent' :
+                      risk === 'medium' ? 'bg-amber-500' :
+                        'bg-success'
+                    }`}>
+                    {risk === 'high' ? <AlertCircle className="text-white w-10 h-10" /> :
+                      risk === 'medium' ? <Info className="text-white w-10 h-10" /> :
+                        <CheckCircle2 className="text-white w-10 h-10" />}
                   </div>
-                  
+
                   <div className="space-y-2">
                     <h2 className="text-3xl font-bold text-primary">
-                      {risk === 'high' ? 'Perhatian Khusus Diperlukan' : 
-                       risk === 'medium' ? 'Waktunya Pemeriksaan Rutin' : 
-                       'Risiko Anda Tergolong Rendah'}
+                      {risk === 'high' ? 'Perhatian Khusus Diperlukan' :
+                        risk === 'medium' ? 'Waktunya Pemeriksaan Rutin' :
+                          'Risiko Anda Tergolong Rendah'}
                     </h2>
                     <p className="text-text-light max-w-lg mx-auto">
-                      {risk === 'high' ? 'Berdasarkan gejala yang Anda alami, kami sangat menyarankan Anda untuk segera berkonsultasi dengan tenaga medis.' : 
-                       risk === 'medium' ? 'Anda berada dalam rentang usia produktif dan sudah waktunya untuk melakukan pemeriksaan IVA rutin.' : 
-                       'Tetap jaga kesehatan reproduksi Anda dan lakukan pemeriksaan rutin sesuai anjuran.'}
+                      {risk === 'high' ? 'Berdasarkan gejala yang Anda alami, kami sangat menyarankan Anda untuk segera berkonsultasi dengan tenaga medis.' :
+                        risk === 'medium' ? 'Anda berada dalam rentang usia produktif dan sudah waktunya untuk melakukan pemeriksaan IVA rutin.' :
+                          'Tetap jaga kesehatan reproduksi Anda dan lakukan pemeriksaan rutin sesuai anjuran.'}
                     </p>
                   </div>
                 </div>
@@ -724,7 +709,7 @@ export default function App() {
                         )}
                       </ul>
                     </div>
-                    
+
                     <div className="space-y-4">
                       <h4 className="font-bold text-primary flex items-center gap-2 uppercase text-xs tracking-widest">
                         <MapPin className="w-4 h-4" />
@@ -742,13 +727,13 @@ export default function App() {
                   </div>
 
                   <div className="pt-8 border-t border-border flex flex-col sm:flex-row gap-4 justify-center">
-                    <button 
+                    <button
                       onClick={() => setStep('landing')}
                       className="px-8 py-3 rounded-xl font-bold border border-border bg-white text-text-main hover:bg-secondary transition-all"
                     >
                       Kembali ke Beranda
                     </button>
-                    <button 
+                    <button
                       onClick={() => setStep('education')}
                       className="px-8 py-3 rounded-xl font-bold bg-primary text-white hover:opacity-90 transition-all shadow-md shadow-primary/10"
                     >
@@ -764,7 +749,7 @@ export default function App() {
                   Puskesmas & Rumah Sakit penyedia layanan IVA di area sekitar Anda.
                 </p>
                 <div className="flex-1 bg-slate-100 rounded-xl flex items-center justify-center text-center p-6 text-text-light text-xs">
-                  Peta Lokasi Layanan IVA<br/>(Preview Map Aktif)
+                  Peta Lokasi Layanan IVA<br />(Preview Map Aktif)
                 </div>
                 <button className="w-full mt-4 py-3 rounded-xl border border-border text-xs font-bold text-text-main hover:bg-secondary transition-all">
                   Cari Lokasi Lain
@@ -774,7 +759,7 @@ export default function App() {
           )}
 
           {step === 'education' && (
-            <motion.div 
+            <motion.div
               key="education"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -836,7 +821,7 @@ export default function App() {
                         Tidak sedang dalam masa menstruasi.
                       </li>
                     </ul>
-                    <button 
+                    <button
                       onClick={startScreening}
                       className="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-secondary transition-all inline-block shadow-lg"
                     >
@@ -844,8 +829,8 @@ export default function App() {
                     </button>
                   </div>
                   <div className="hidden md:block">
-                    <img 
-                      src="https://picsum.photos/seed/doctor/600/400" 
+                    <img
+                      src="https://picsum.photos/seed/doctor/600/400"
                       className="rounded-2xl shadow-2xl border border-white/10"
                       alt="Doctor"
                       referrerPolicy="no-referrer"
