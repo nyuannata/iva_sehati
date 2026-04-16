@@ -243,12 +243,28 @@ export default function App() {
 
               <div className="relative">
                 <div className="absolute -inset-4 bg-secondary rounded-2xl rotate-2 -z-10 opacity-50"></div>
-                <img 
-                  src="https://picsum.photos/seed/woman-health-illustration/800/1000" 
-                  className="rounded-2xl shadow-2xl w-full aspect-[4/5] object-cover border border-border"
-                  alt="Ilustrasi Kesehatan Wanita"
-                  referrerPolicy="no-referrer"
-                />
+                <div className="rounded-2xl shadow-xl w-full aspect-[4/5] border border-border bg-gradient-to-br from-secondary to-white flex items-center justify-center p-12 relative overflow-hidden">
+                  <motion.div 
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }} 
+                    transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                    className="absolute w-64 h-64 bg-primary/20 rounded-full blur-3xl"
+                  />
+                  <motion.div 
+                    animate={{ scale: [1, 1.05, 1] }}
+                    transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                    className="relative z-10 w-full h-full"
+                  >
+                    <svg viewBox="0 0 100 100" className="w-full h-full text-primary drop-shadow-2xl" fill="currentColor">
+                      <path d="M50 75 C35 75 30 55 30 40 C30 20 40 15 50 15 C60 15 70 20 70 40 C70 55 65 75 50 75 Z" opacity="0.9" />
+                      <path d="M43 73 L40 85 Q50 90 60 85 L57 73 Z" opacity="0.7" />
+                      <path d="M32 25 Q15 20 15 35" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.8" />
+                      <path d="M68 25 Q85 20 85 35" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.8" />
+                      <circle cx="12" cy="38" r="4.5" fill="var(--color-accent)" />
+                      <circle cx="88" cy="38" r="4.5" fill="var(--color-accent)" />
+                      <path d="M50 22 C45 22 42 28 42 35 C42 45 48 55 50 55 C52 55 58 45 58 35 C58 28 55 22 50 22 Z" fill="#ffffff" opacity="0.2" />
+                    </svg>
+                  </motion.div>
+                </div>
                 <div className="absolute bottom-8 left-8 right-8 bg-white/95 backdrop-blur p-6 rounded-2xl shadow-2xl border border-border">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center shrink-0">
@@ -849,13 +865,13 @@ export default function App() {
             <div className="w-6 h-6 bg-primary rounded flex items-center justify-center">
               <Heart className="text-white w-4 h-4" />
             </div>
-            <span className="font-bold text-lg tracking-tight text-primary">SeraCare</span>
+            <span className="font-bold text-lg tracking-tight text-primary">IVA SEHATI</span>
           </div>
           <p className="text-text-light text-sm max-w-md mx-auto">
             Aplikasi ini hanya bersifat skrining awal dan edukasi. Hasil skrining bukan merupakan diagnosis medis final.
           </p>
           <div className="text-text-light text-xs">
-            © 2024 SeraCare - Skrining IVA Mandiri. Dibuat untuk kesehatan wanita Indonesia.
+            © 2026 - Skrining IVA Mandiri. Dibuat untuk kesehatan wanita Indonesia.
           </div>
         </div>
       </footer>
