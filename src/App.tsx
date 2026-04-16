@@ -724,16 +724,21 @@ export default function App() {
               </div>
 
               <aside className="clinic-locator bg-white rounded-2xl border border-border p-6 flex flex-col min-h-[400px]">
-                <h3 className="text-xs font-bold text-primary uppercase tracking-widest mb-2">Lokasi IVA Terdekat</h3>
+                <h3 className="text-xs font-bold text-primary uppercase tracking-widest mb-2">Lokasi IVA Anda</h3>
                 <p className="text-xs text-text-light mb-4">
-                  Puskesmas & Rumah Sakit penyedia layanan IVA di area sekitar Anda.
+                  Kunjungi fasilitas kesehatan berikut untuk melakukan pemeriksaan IVA:
                 </p>
-                <div className="flex-1 bg-slate-100 rounded-xl flex items-center justify-center text-center p-6 text-text-light text-xs">
-                  Peta Lokasi Layanan IVA<br />(Preview Map Aktif)
+                <div className="flex-1 bg-slate-50 border border-slate-200 rounded-xl flex flex-col items-center justify-center text-center p-6 text-text-main text-sm space-y-3 shadow-inner">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-2">
+                    <MapPin className="w-6 h-6 text-primary" />
+                  </div>
+                  <strong className="text-primary text-base">Puskesmas Pakuan Baru</strong>
+                  <p className="text-text-light text-xs leading-relaxed">
+                    Jl. Jendral Sudirman No. 75<br/>
+                    Kel. Tambak Sari, Kota Jambi<br/><br/>
+                    <strong>Telp. (0741) 7554477</strong>
+                  </p>
                 </div>
-                <button className="w-full mt-4 py-3 rounded-xl border border-border text-xs font-bold text-text-main hover:bg-secondary transition-all">
-                  Cari Lokasi Lain
-                </button>
               </aside>
             </motion.div>
           )}

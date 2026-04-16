@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #B85075;
-  --color-secondary: #FDF1F4;
-  --color-accent: #E48F9A;
-  --color-text-main: #2D2327;
-  --color-text-light: #7A666D;
-  --color-success: #10B981;
-  --color-border: #F1DEE4;
+  --color-primary: #05703E; /* Green Puskesmas */
+  --color-secondary: #F0FDF4; /* Sangat muda, light emerald untuk background kartu */
+  --color-accent: #10B981; /* Emerald 500 untuk highlights */
+  --color-text-main: #1C2B24; /* Hijau super gelap ke arah hitam untuk teks utama */
+  --color-text-light: #52665B; /* Abu-abu kehijauan untuk teks sekunder */
+  --color-success: #059669; /* Emerald 600 */
+  --color-border: #D1FAE5; /* Emerald 100 untuk border ringan */
   
   --font-sans: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
