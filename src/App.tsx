@@ -682,9 +682,18 @@ export default function App() {
                           </>
                         ) : (
                           <>
-                            <li className="flex gap-2">• Lakukan pemeriksaan rutin pada fasilitas kesehatan seperti Puskesmas Pakuan Baru jika dianjurkan.</li>
-                            <li className="flex gap-2">• Jaga pola hidup sehat.</li>
-                            <li className="flex gap-2">• Dapatkan vaksinasi HPV bila memungkinkan.</li>
+                            <li className="flex gap-3 items-start">
+                              <span className="text-primary font-bold mt-0.5">•</span>
+                              <span>Tetap konsisten memelihara pola hidup sehat dan kebersihan anatomi reproduksi sebagai langkah utama prevensi.</span>
+                            </li>
+                            <li className="flex gap-3 items-start">
+                              <span className="text-primary font-bold mt-0.5">•</span>
+                              <span>Lakukan observasi mandiri secara berkala dan segera kunjungi fasilitas kesehatan jika terdapat keluhan.</span>
+                            </li>
+                            <li className="flex gap-3 items-start">
+                              <span className="text-primary font-bold mt-0.5">•</span>
+                              <span>Pertimbangkan pemberian vaksinasi HPV sebagai sarana proteksi proaktif sesuai anjuran medis.</span>
+                            </li>
                           </>
                         )}
                       </ul>
@@ -723,20 +732,37 @@ export default function App() {
                 </div>
               </div>
 
-              <aside className="clinic-locator bg-white rounded-2xl border border-border p-6 flex flex-col min-h-[400px]">
+              <aside className="bg-white rounded-2xl border border-border p-6 flex flex-col">
                 <h3 className="text-xs font-bold text-primary uppercase tracking-widest mb-2">Lokasi IVA Anda</h3>
                 <p className="text-xs text-text-light mb-4">
-                  Kunjungi fasilitas kesehatan berikut untuk melakukan pemeriksaan IVA:
+                  Silakan berkonsultasi lebih lanjut di faskes berikut:
                 </p>
-                <div className="flex-1 bg-slate-50 border border-slate-200 rounded-xl flex flex-col items-center justify-center text-center p-6 text-text-main text-sm space-y-3 shadow-inner">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-2">
-                    <MapPin className="w-6 h-6 text-primary" />
-                  </div>
-                  <strong className="text-primary text-base">Puskesmas Pakuan Baru</strong>
-                  <p className="text-text-light text-xs leading-relaxed">
+                
+                {/* Google Maps Embed */}
+                <div className="w-full h-[250px] rounded-xl overflow-hidden border border-border/50 mb-4 shadow-inner">
+                  <iframe 
+                    title="Peta Lokasi Puskesmas Pakuan Baru"
+                    src="https://maps.google.com/maps?q=Jl.%20Jendral%20Sudirman%20No.%2075%20Kel.%20Tambak%20Sari%20Kota%20Jambi&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 0 }} 
+                    allowFullScreen 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
+
+                <div className="bg-secondary/40 p-5 rounded-xl text-center border border-primary/10">
+                  <strong className="text-primary text-sm flex items-center justify-center gap-2 mb-2">
+                    <MapPin className="w-4 h-4" />
+                    Puskesmas Pakuan Baru
+                  </strong>
+                  <p className="text-text-main text-xs leading-relaxed">
                     Jl. Jendral Sudirman No. 75<br/>
-                    Kel. Tambak Sari, Kota Jambi<br/><br/>
-                    <strong>Telp. (0741) 7554477</strong>
+                    Kel. Tambak Sari, Kota Jambi<br/>
+                    <span className="inline-block mt-2 font-bold px-3 py-1 bg-white rounded-md shadow-sm">
+                      📞 (0741) 7554477
+                    </span>
                   </p>
                 </div>
               </aside>
