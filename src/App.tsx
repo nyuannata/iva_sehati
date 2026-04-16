@@ -196,30 +196,13 @@ export default function App() {
               exit={{ opacity: 0, y: -20 }}
               className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center"
             >
-              <div className="relative w-full aspect-square md:order-1 order-2">
-                <div className="absolute inset-0 rounded-full overflow-hidden bg-secondary shadow-2xl">
+              <div className="relative w-full aspect-[4/3] md:order-1 order-2 mt-4 md:mt-0">
+                <div className="absolute inset-0 rounded-[2.5rem] overflow-hidden bg-white shadow-2xl border-4 border-white">
                   <img 
-                    src="https://images.unsplash.com/photo-1594824436998-d50d4dff130a?auto=format&fit=crop&q=80&w=800" 
-                    className="w-full h-full object-cover opacity-95 hover:scale-105 transition-transform duration-1000"
-                    alt="Dokter menangani pasien serviks"
+                    src="/uterus_hands.png" 
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
+                    alt="Proteksi Rahim"
                   />
-                  <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 w-full h-full text-white pointer-events-none">
-                     <path fill="currentColor" fillRule="evenodd" clipRule="evenodd" 
-                           d="M0,0 H100 V100 H0 Z 
-                              M 46 90 
-                              Q 50 93 54 90 
-                              L 54 83 
-                              C 62 78 66 65 66 52 
-                              C 66 48 75 42 82 45 
-                              C 88 48 92 40 85 36 
-                              C 78 32 70 35 62 26 
-                              C 58 15 42 15 38 26 
-                              C 30 35 22 32 15 36 
-                              C 8 40 12 48 18 45 
-                              C 25 42 34 48 34 52 
-                              C 34 65 38 78 46 83 
-                              L 46 90 Z" />
-                  </svg>
                 </div>
                 <div className="absolute -top-4 -left-4 w-32 h-32 bg-primary/10 rounded-full blur-2xl -z-10"></div>
                 <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-accent/10 rounded-full blur-3xl -z-10"></div>
