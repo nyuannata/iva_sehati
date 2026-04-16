@@ -295,7 +295,7 @@ export default function App() {
                       <div
                         key={s}
                         className={`flex-1 h-1.5 rounded-full transition-colors ${s < screeningStep ? 'bg-success' :
-                            s === screeningStep ? 'bg-primary' : 'bg-secondary'
+                          s === screeningStep ? 'bg-primary' : 'bg-secondary'
                           }`}
                       />
                     ))}
@@ -532,8 +532,8 @@ export default function App() {
                             key={symptom.id}
                             onClick={() => toggleSymptom(symptom.id)}
                             className={`w-full p-5 rounded-2xl text-left text-lg font-semibold border-2 transition-all flex items-center justify-between ${data.symptoms.includes(symptom.id)
-                                ? 'border-primary bg-secondary text-primary'
-                                : 'border-border hover:border-primary/30 text-text-main'
+                              ? 'border-primary bg-secondary text-primary'
+                              : 'border-border hover:border-primary/30 text-text-main'
                               }`}
                           >
                             {symptom.label}
@@ -561,8 +561,8 @@ export default function App() {
                             key={opt.id}
                             onClick={() => setData({ ...data, lastTest: opt.id })}
                             className={`w-full p-5 rounded-2xl text-left text-lg font-semibold border-2 transition-all flex items-center justify-between ${data.lastTest === opt.id
-                                ? 'border-primary bg-secondary text-primary'
-                                : 'border-border hover:border-primary/30 text-text-main'
+                              ? 'border-primary bg-secondary text-primary'
+                              : 'border-border hover:border-primary/30 text-text-main'
                               }`}
                           >
                             {opt.label}
@@ -654,12 +654,12 @@ export default function App() {
             >
               <div className="bg-white rounded-2xl border border-border shadow-md overflow-hidden">
                 <div className={`p-10 text-center space-y-6 ${risk === 'high' ? 'bg-rose-50' :
-                    risk === 'medium' ? 'bg-amber-50' :
-                      'bg-emerald-50'
+                  risk === 'medium' ? 'bg-amber-50' :
+                    'bg-emerald-50'
                   }`}>
                   <div className={`w-20 h-20 rounded-full mx-auto flex items-center justify-center shadow-lg ${risk === 'high' ? 'bg-accent' :
-                      risk === 'medium' ? 'bg-amber-500' :
-                        'bg-success'
+                    risk === 'medium' ? 'bg-amber-500' :
+                      'bg-success'
                     }`}>
                     {risk === 'high' ? <AlertCircle className="text-white w-10 h-10" /> :
                       risk === 'medium' ? <Info className="text-white w-10 h-10" /> :
@@ -856,7 +856,8 @@ export default function App() {
             Aplikasi ini hanya bersifat skrining awal dan edukasi. Hasil skrining bukan merupakan diagnosis medis final.
           </p>
           <div className="text-text-light text-xs">
-            © 2026 - Skrining IVA Mandiri. Dibuat untuk kesehatan wanita Indonesia.
+            © 2026 - Skrining IVA Mandiri. Dibuat untuk kesehatan wanita Indonesia.<br />
+            <span className="mt-2 block font-medium">Developed by yuan nata nugraha</span>
           </div>
         </div>
       </footer>
