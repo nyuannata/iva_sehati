@@ -199,7 +199,7 @@ export default function App() {
               <div className="relative w-full aspect-square md:order-1 order-2">
                 <div className="absolute inset-0 rounded-full overflow-hidden bg-secondary shadow-2xl">
                   <img 
-                    src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=800" 
+                    src="https://images.unsplash.com/photo-1594824436998-d50d4dff130a?auto=format&fit=crop&q=80&w=800" 
                     className="w-full h-full object-cover opacity-95 hover:scale-105 transition-transform duration-1000"
                     alt="Dokter menangani pasien serviks"
                   />
@@ -224,15 +224,7 @@ export default function App() {
                 <div className="absolute -top-4 -left-4 w-32 h-32 bg-primary/10 rounded-full blur-2xl -z-10"></div>
                 <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-accent/10 rounded-full blur-3xl -z-10"></div>
                 
-                <div className="absolute bottom-4 left-4 md:bottom-8 md:-right-8 bg-white/95 backdrop-blur px-6 py-4 rounded-xl shadow-2xl border border-border flex items-center gap-4">
-                  <div className="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center shrink-0">
-                    <ShieldCheck className="text-primary w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-[#1A1A24] text-sm md:text-base">Penjagaan Rahim</h3>
-                    <p className="text-xs md:text-sm text-text-light">Aman & Terpercaya</p>
-                  </div>
-                </div>
+
               </div>
 
               <div className="space-y-6 md:order-2 order-1 px-4 md:px-0">
