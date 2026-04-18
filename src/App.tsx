@@ -91,17 +91,46 @@ export default function App() {
     willingToIva: null,
   });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // URL Web App dari Google Apps Script
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxfr3eePPF8N2HWKt475GYr0TPcRVxt9VvnoRpo34vdPlqmEBsI9pKtK3usU9NTGdj0Ng/exec";
 
   const startScreening = () => {
     setStep('screening');
     setScreeningStep(0);
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (screeningStep < 5) {
       setScreeningStep(prev => prev + 1);
     } else {
-      setStep('result');
+      if (GOOGLE_SCRIPT_URL !== "ISI_DENGAN_URL_WEB_APP_APPS_SCRIPT_ANDA_DISINI") {
+        setIsSubmitting(true);
+        try {
+          const payload = { ...data, riskResult: getRiskLevel() };
+          
+          // Menggunakan x-www-form-urlencoded agar tidak terkena blokir CORS
+          const formBody = new URLSearchParams();
+          formBody.append("data", JSON.stringify(payload));
+          
+          await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formBody,
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+            }
+          });
+        } catch (error) {
+          console.error("Gagal menyimpan data ke Spreadsheet", error);
+        } finally {
+          setIsSubmitting(false);
+          setStep('result');
+        }
+      } else {
+        setStep('result');
+      }
     }
   };
 
@@ -600,6 +629,7 @@ export default function App() {
                   <button
                     onClick={handleNext}
                     disabled={
+                      isSubmitting ||
                       (screeningStep === 0 && (!data.name || !data.age || !data.maritalStatus || !data.phone || !data.address)) ||
                       (screeningStep === 1 && (data.sexuallyActive === null || (data.sexuallyActive && (data.earlySexualActivity === null || data.multiplePartners === null)))) ||
                       (screeningStep === 2 && (data.multipara === null || data.earlyFirstBirth === null || data.hormonalContraception === null || data.smokingExposure === null || data.hivStatus === null)) ||
@@ -609,7 +639,7 @@ export default function App() {
                     }
                     className="px-8 py-3 rounded-xl font-bold bg-primary text-white hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-md shadow-primary/10"
                   >
-                    {screeningStep === 5 ? 'Lihat Hasil' : 'Lanjutkan'} <ChevronRight className="w-4 h-4" />
+                    {isSubmitting ? 'Menyimpan...' : screeningStep === 5 ? 'Lihat Hasil' : 'Lanjutkan'} {!isSubmitting && <ChevronRight className="w-4 h-4" />}
                   </button>
                 </div>
               </div>
