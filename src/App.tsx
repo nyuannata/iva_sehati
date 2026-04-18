@@ -110,16 +110,12 @@ export default function App() {
         try {
           const payload = { ...data, riskResult: getRiskLevel() };
 
-          // Menggunakan x-www-form-urlencoded agar tidak terkena blokir CORS
-          const formBody = new URLSearchParams();
-          formBody.append("data", JSON.stringify(payload));
-
           await fetch(GOOGLE_SCRIPT_URL, {
             method: 'POST',
             mode: 'no-cors',
-            body: formBody,
+            body: JSON.stringify(payload),
             headers: {
-              'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+              'Content-Type': 'text/plain;charset=UTF-8'
             }
           });
         } catch (error) {
