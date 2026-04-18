@@ -21,14 +21,22 @@ import {
   Activity
 } from 'lucide-react';
 
-const PuskesmasLogo = ({ className = "w-6 h-6", fillColor = "currentColor" }) => (
-  <svg viewBox="0 0 120 120" className={className} xmlns="http://www.w3.org/2000/svg" fill="none">
-    <polygon points="60,8 112,38 112,98 60,128 8,98 8,38" fill="none" stroke={fillColor} strokeWidth="12" strokeLinejoin="round"/>
-    <path d="M42,28 V46 H20 V74 H42 V92 H68 V74 H90 V46 H68 V28 Z" fill={fillColor} />
-    <path d="M42,70 L72,46 L108,70 L108,82 L72,56 L42,80 Z" fill="#fff" />
-    <circle cx="67" cy="74" r="6" fill="none" stroke="#fff" strokeWidth="3" />
-    <circle cx="77" cy="74" r="6" fill="none" stroke="#fff" strokeWidth="3" />
-  </svg>
+const UterusLogo = ({ className = "w-6 h-6", fillColor = "currentColor" }) => (
+  <motion.svg 
+    viewBox="0 0 120 120" 
+    className={className} 
+    xmlns="http://www.w3.org/2000/svg" 
+    fill="none"
+    animate={{ scale: [1, 1.08, 1] }}
+    transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
+  >
+    <path d="M60 85 C70 85, 80 65, 80 50 C80 30, 65 30, 60 30 C55 30, 40 30, 40 50 C40 65, 50 85, 60 85 Z" fill={fillColor}/>
+    <path d="M43 42 Q 25 35, 18 50" fill="none" stroke={fillColor} strokeWidth="8" strokeLinecap="round" />
+    <path d="M77 42 Q 95 35, 102 50" fill="none" stroke={fillColor} strokeWidth="8" strokeLinecap="round" />
+    <circle cx="16" cy="53" r="10" fill={fillColor} />
+    <circle cx="104" cy="53" r="10" fill={fillColor} />
+    <path d="M54 83 L54 100 C54 105, 66 105, 66 100 L66 83 Z" fill={fillColor} />
+  </motion.svg>
 );
 
 // Types
@@ -142,7 +150,7 @@ export default function App() {
             className="flex items-center gap-2 cursor-pointer"
             onClick={() => setStep('landing')}
           >
-            <PuskesmasLogo className="w-8 h-8 text-primary" />
+            <UterusLogo className="w-8 h-8 text-primary" />
             <div className="flex flex-col">
               <span className="font-extrabold text-xl tracking-tight text-primary leading-none">SIPAKAR</span>
               <span className="text-[10px] sm:text-xs font-bold text-text-light leading-none mt-1">Skrining IVA Perempuan Pakuan Baru</span>
@@ -858,7 +866,7 @@ export default function App() {
       <footer className="bg-white border-t border-border py-12 mt-20">
         <div className="max-w-[1200px] mx-auto px-10 text-center space-y-6">
           <div className="flex items-center justify-center gap-2">
-            <PuskesmasLogo className="w-8 h-8 text-primary" />
+            <UterusLogo className="w-8 h-8 text-primary" />
             <span className="font-bold text-xl tracking-tight text-primary">SIPAKAR</span>
           </div>
           <p className="text-text-light text-sm max-w-md mx-auto">
