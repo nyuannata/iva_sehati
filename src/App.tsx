@@ -22,15 +22,15 @@ import {
 } from 'lucide-react';
 
 const UterusLogo = ({ className = "w-6 h-6", fillColor = "currentColor" }) => (
-  <motion.svg 
-    viewBox="0 0 120 120" 
-    className={className} 
-    xmlns="http://www.w3.org/2000/svg" 
+  <motion.svg
+    viewBox="0 0 120 120"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
     fill="none"
     animate={{ scale: [1, 1.08, 1] }}
     transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
   >
-    <path d="M60 85 C70 85, 80 65, 80 50 C80 30, 65 30, 60 30 C55 30, 40 30, 40 50 C40 65, 50 85, 60 85 Z" fill={fillColor}/>
+    <path d="M60 85 C70 85, 80 65, 80 50 C80 30, 65 30, 60 30 C55 30, 40 30, 40 50 C40 65, 50 85, 60 85 Z" fill={fillColor} />
     <path d="M43 42 Q 25 35, 18 50" fill="none" stroke={fillColor} strokeWidth="8" strokeLinecap="round" />
     <path d="M77 42 Q 95 35, 102 50" fill="none" stroke={fillColor} strokeWidth="8" strokeLinecap="round" />
     <circle cx="16" cy="53" r="10" fill={fillColor} />
@@ -105,15 +105,15 @@ export default function App() {
     if (screeningStep < 5) {
       setScreeningStep(prev => prev + 1);
     } else {
-      if (GOOGLE_SCRIPT_URL !== "ISI_DENGAN_URL_WEB_APP_APPS_SCRIPT_ANDA_DISINI") {
+      if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.startsWith("http")) {
         setIsSubmitting(true);
         try {
           const payload = { ...data, riskResult: getRiskLevel() };
-          
+
           // Menggunakan x-www-form-urlencoded agar tidak terkena blokir CORS
           const formBody = new URLSearchParams();
           formBody.append("data", JSON.stringify(payload));
-          
+
           await fetch(GOOGLE_SCRIPT_URL, {
             method: 'POST',
             mode: 'no-cors',
@@ -160,11 +160,11 @@ export default function App() {
     const hasSymptoms = data.symptoms.length > 0 && !data.symptoms.includes('none');
 
     if (hasSymptoms) return 'symptoms';
-    
+
     if (data.maritalStatus === 'married' || data.maritalStatus === 'divorced' || data.sexuallyActive) {
       return 'active';
     }
-    
+
     return 'inactive';
   };
 
@@ -238,15 +238,15 @@ export default function App() {
             >
               <div className="relative w-full aspect-[4/3] md:order-1 order-2 mt-4 md:mt-0">
                 <div className="absolute inset-0 rounded-[2.5rem] overflow-hidden bg-white shadow-2xl border-4 border-white">
-                  <img 
-                    src="/uterus_hands.png" 
+                  <img
+                    src="/uterus_hands.png"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
                     alt="Proteksi Rahim"
                   />
                 </div>
                 <div className="absolute -top-4 -left-4 w-32 h-32 bg-primary/10 rounded-full blur-2xl -z-10"></div>
                 <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-accent/10 rounded-full blur-3xl -z-10"></div>
-                
+
 
               </div>
 
@@ -262,27 +262,27 @@ export default function App() {
                   Lakukan skrining mandiri secara dini untuk mengetahui risiko Anda dan dapatkan rekomendasi pemeriksaan IVA yang tepat.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <button 
+                  <button
                     onClick={startScreening}
                     className="group bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:opacity-90 transition-all flex items-center justify-center gap-2 shadow-xl shadow-primary/20"
                   >
                     Mulai Skrining
                     <ArrowRight className="group-hover:translate-x-1 transition-transform" />
                   </button>
-                  <button 
+                  <button
                     onClick={() => setStep('education')}
                     className="px-8 py-4 rounded-xl font-bold text-lg border-2 border-border bg-white hover:border-primary hover:text-primary transition-all flex items-center justify-center gap-2 text-text-main"
                   >
                     Info IVA
                   </button>
                 </div>
-                
+
                 <div className="flex flex-wrap items-center gap-4 pt-8 border-t border-border/50">
                   <div className="flex -space-x-2 shrink-0">
-                    {[1,2,3].map(i => (
-                      <img 
+                    {[1, 2, 3].map(i => (
+                      <img
                         key={i}
-                        src={`https://picsum.photos/seed/user${i}/100/100`} 
+                        src={`https://picsum.photos/seed/user${i}/100/100`}
                         className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm"
                         alt="User"
                         referrerPolicy="no-referrer"
@@ -775,17 +775,17 @@ export default function App() {
                 <p className="text-xs text-text-light mb-4">
                   Silakan berkonsultasi lebih lanjut di faskes berikut:
                 </p>
-                
+
                 {/* Google Maps Embed */}
                 <div className="w-full h-[250px] rounded-xl overflow-hidden border border-border/50 mb-4 shadow-inner">
-                  <iframe 
+                  <iframe
                     title="Peta Lokasi Puskesmas Pakuan Baru"
-                    src="https://maps.google.com/maps?q=Jl.%20Jendral%20Sudirman%20No.%2075%20Kel.%20Tambak%20Sari%20Kota%20Jambi&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-                    width="100%" 
-                    height="100%" 
-                    style={{ border: 0 }} 
-                    allowFullScreen 
-                    loading="lazy" 
+                    src="https://maps.google.com/maps?q=Jl.%20Jendral%20Sudirman%20No.%2075%20Kel.%20Tambak%20Sari%20Kota%20Jambi&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                   />
                 </div>
@@ -796,8 +796,8 @@ export default function App() {
                     Puskesmas Pakuan Baru
                   </strong>
                   <p className="text-text-main text-xs leading-relaxed">
-                    Jl. Jendral Sudirman No. 75<br/>
-                    Kel. Tambak Sari, Kota Jambi<br/>
+                    Jl. Jendral Sudirman No. 75<br />
+                    Kel. Tambak Sari, Kota Jambi<br />
                     <span className="inline-block mt-2 font-bold px-3 py-1 bg-white rounded-md shadow-sm">
                       📞 (0741) 7554477
                     </span>
